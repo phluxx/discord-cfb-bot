@@ -2,7 +2,7 @@ package bot
 
 import (
 	"discord-cfb-bot/config"
-	"discord-cfb-bot/clients"
+	"discord-cfb-bot/internal/clients"
 	"github.com/bwmarrin/discordgo"
 	"fmt"
 	"strings"

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"discord-cfb-bot/bot"
+	"discord-cfb-bot/internal/bot"
 	"discord-cfb-bot/config"
 	"fmt"
 )
