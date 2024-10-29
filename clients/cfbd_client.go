@@ -22,13 +22,12 @@ type Game struct {
 func getCurrentWeek() int {
     startDate, _ := time.Parse("2006-01-02", seasonStartDate)
     weeks := int(time.Since(startDate).Hours() / (24 * 7))
-    return weeks + 1 // +1 to adjust to the 1-based week number
+    return weeks + 1
 }
 
 func GetGameInfo(teamName string) string {
     currentWeek := getCurrentWeek()
     
-    // Use url.QueryEscape to properly encode team names with special characters
     encodedTeamName := url.QueryEscape(teamName)
     url := fmt.Sprintf("https://api.collegefootballdata.com/games?year=%d&week=%d&team=%s", time.Now().Year(), currentWeek, encodedTeamName)
 
