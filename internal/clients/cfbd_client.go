@@ -50,10 +50,12 @@ func GetGameInfo(teamName string) string {
 
     for _, game := range games {
         startTime, _ := time.Parse(time.RFC3339, game.StartDateTime)
+	eastern := time.LoadLocation("America/New_York")
+	startTimeEastern := startTime.In(eastern)
         if time.Now().After(startTime) && game.HomePoints != nil && game.AwayPoints != nil {
             return fmt.Sprintf("%s: %d %s: %d", game.AwayTeam, *game.AwayPoints, game.HomeTeam, *game.HomePoints)
         } else if time.Now().Before(startTime) {
-            return fmt.Sprintf("%s @ %s %s Eastern", game.AwayTeam, game.HomeTeam, startTime.Format("03:04 PM"))
+            return fmt.Sprintf("%s @ %s %s Eastern", game.AwayTeam, game.HomeTeam, startTimeEastern.Format("03:04 PM"))
         }
     }
 
