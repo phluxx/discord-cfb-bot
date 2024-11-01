@@ -50,7 +50,11 @@ func GetGameInfo(teamName string) string {
 
     for _, game := range games {
         startTime, _ := time.Parse(time.RFC3339, game.StartDateTime)
-	eastern := time.LoadLocation("America/New_York")
+	eastern, err := time.LoadLocation("America/New_York")
+	if err != nil {
+		fmt.Println("Error loading Eastern timezone")
+		return "Error fetching game time"
+	}
 	startTimeEastern := startTime.In(eastern)
         if time.Now().After(startTime) && game.HomePoints != nil && game.AwayPoints != nil {
             return fmt.Sprintf("%s: %d %s: %d", game.AwayTeam, *game.AwayPoints, game.HomeTeam, *game.HomePoints)
